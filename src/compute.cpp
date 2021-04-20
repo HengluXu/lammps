@@ -81,6 +81,9 @@ Compute::Compute(LAMMPS *lmp, int narg, char **arg) :
   // set modify defaults
 
   extra_dof = domain->dimension;
+  // intial setting of extra_dof
+  //  extra_dof = 0.0;
+  if (logfile) fprintf(logfile, "HX test extra dof %f\n", extra_dof);
   dynamic_user = 0;
   fix_dof = 0;
 
@@ -143,11 +146,28 @@ void Compute::adjust_dof_fix()
 {
   Fix **fix = modify->fix;
   int nfix = modify->nfix;
+  // setting dof_fix
+  if (logfile) fprintf(logfile, "HX test adjust dof fix 1 nfix %d\n", nfix);
 
   fix_dof = 0;
   for (int i = 0; i < nfix; i++)
     if (fix[i]->dof_flag)
       fix_dof += fix[i]->dof(igroup);
+/* // testing fix_dof implementation
+  int s;
+  for ( int i = 0 ; i < nfix; i++){
+ 	s = i;
+    if (logfile) fprintf(logfile, "HX test adjust nfix2 %d\n", nfix);
+    if (logfile) fprintf(logfile, "HX test adjust i %d\n", s);
+    if (fix[s]->dof_flag)
+      fix_dof += fix[s]->dof(igroup);
+	  if (logfile) fprintf(logfile, "HX test adjust loop extra dof %f\n", extra_dof);
+	  if (logfile) fprintf(logfile, "HX test adjust loop fix dof %d\n", fix_dof);
+    if (logfile) fprintf(logfile, "HX test adjust nfix3 %d\n", nfix);
+ */
+}
+
+  if (logfile) fprintf(logfile, "HX test adjust fix dof %d\n", fix_dof);
 }
 
 /* ----------------------------------------------------------------------
@@ -156,7 +176,10 @@ void Compute::adjust_dof_fix()
 
 void Compute::reset_extra_dof()
 {
+// check reset_extra_dof before and after reset
+  if (logfile) fprintf(logfile, "HX test before reset extra dof %f\n", extra_dof);
   extra_dof = domain->dimension;
+  if (logfile) fprintf(logfile, "HX test after reset extra dof %f\n", extra_dof);
 }
 
 /* ---------------------------------------------------------------------- */

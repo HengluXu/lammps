@@ -761,6 +761,8 @@ void FixNH::setup(int /*vflag*/)
 
   t_current = temperature->compute_scalar();
   tdof = temperature->dof;
+  // print tdof
+  if (logfile) fprintf(logfile, "HX test tdof %f\n", tdof);// %s", tdof);
 
   // t_target is needed by NVT and NPT in compute_scalar()
   // If no thermostat or using fix nphug,

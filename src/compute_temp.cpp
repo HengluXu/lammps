@@ -62,7 +62,12 @@ void ComputeTemp::dof_compute()
   adjust_dof_fix();
   natoms_temp = group->count(igroup);
   dof = domain->dimension * natoms_temp;
-  dof -= extra_dof + fix_dof;
+  //dof -= extra_dof + fix_dof;
+  // correction for extra_dof
+  dof -= fix_dof;
+  if (logfile) fprintf(logfile, "HX test dof all %f\n", dof);
+  if (logfile) fprintf(logfile, "HX test tfactor %f\n", tfactor);
+
   if (dof > 0.0) tfactor = force->mvv2e / (dof * force->boltz);
   else tfactor = 0.0;
 }
