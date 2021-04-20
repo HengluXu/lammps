@@ -164,9 +164,8 @@ void Compute::adjust_dof_fix()
 	  if (logfile) fprintf(logfile, "HX test adjust loop extra dof %f\n", extra_dof);
 	  if (logfile) fprintf(logfile, "HX test adjust loop fix dof %d\n", fix_dof);
     if (logfile) fprintf(logfile, "HX test adjust nfix3 %d\n", nfix);
- */
-}
-
+  }
+*/
   if (logfile) fprintf(logfile, "HX test adjust fix dof %d\n", fix_dof);
 }
 
